@@ -1,0 +1,1228 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerConnect | Bridging Talent with Opportunity</title>
+      <link rel="icon" type="image/png" href="c:\Users\user\Desktop\static j\logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --error: #e74c3c;
+            --gray: #95a5a6;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Services */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Forms */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 1rem;
+            background-color: var(--light);
+            border: 2px dashed var(--gray);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-label:hover {
+            background-color: #e0e0e0;
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: var(--secondary);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: -1px;
+            left: 0;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links h3, .footer-social h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+
+        /* Message Styles */
+        .message {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            z-index: 1001;
+            animation: slideIn 0.5s ease;
+            max-width: 400px;
+        }
+
+        .message-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .message.success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .message.error {
+            background-color: var(--error);
+            color: white;
+        }
+
+        .message.warning {
+            background-color: var(--warning);
+            color: white;
+        }
+
+        .message.info {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--secondary);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: var(--shadow);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <image src="c:\Users\user\Desktop\static j\logo.png" style="width: 60px; height: 50px;"></image>
+                <a href="#" class="logo">Career<span>Connect</span></a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#job-seekers">For Job Seekers</a></li>
+                    <li><a href="#employers">For Employers</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Bridging Talent with Opportunity</h1>
+            <p>As a dedicated career connector, I help job seekers find their perfect role and employers discover top talent. With personalized guidance and a network of opportunities, I facilitate meaningful connections that drive career growth and business success.</p>
+            <div class="cta-buttons">
+                <a href="#job-seekers" class="btn btn-primary">I'm a Job Seeker</a>
+                <a href="#employers" class="btn btn-secondary">I'm an Employer</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>How I Can Help</h2>
+                <p>Comprehensive career connection services for both job seekers and employers</p>
+            </div>
+            <div class="services-container">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Career Guidance</h3>
+                    <p>Personalized advice to help job seekers identify their strengths, refine their career goals, and prepare for interviews.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                    <h3>CV Review & Optimization</h3>
+                    <p>Professional CV assessment and enhancement to ensure your application stands out to potential employers.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Employer Connections</h3>
+                    <p>Direct introductions to hiring managers and companies that match your skills, experience, and career aspirations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Seekers Section -->
+    <section id="job-seekers" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>For Job Seekers</h2>
+                <p>Take the next step in your career journey. Upload your CV and let me connect you with the right opportunities.</p>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="upload-cv">Upload CV</button>
+                <button class="tab-btn" data-tab="contact-form">Contact Me</button>
+            </div>
+            
+            <div class="tab-content active" id="upload-cv">
+                <div class="form-container">
+                    <form id="cvUploadForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="jobTitle">Desired Job Title *</label>
+                                <input type="text" id="jobTitle" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="experience">Years of Experience *</label>
+                            <select id="experience" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="0-2">0-2 years</option>
+                                <option value="3-5">3-5 years</option>
+                                <option value="6-10">6-10 years</option>
+                                <option value="10+">10+ years</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Additional Information</label>
+                            <textarea id="message" class="form-control" placeholder="Tell me about your career goals, preferred industries, or any specific requirements..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Your CV *</label>
+                            <div class="file-upload">
+                                <input type="file" id="cvFile" accept=".pdf,.doc,.docx" required>
+                                <label for="cvFile" class="file-upload-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Click to upload your CV (PDF, DOC, DOCX)</p>
+                                    <p>Max file size: 5MB</p>
+                                </label>
+                                <div class="file-name" id="fileName">No file selected</div>
+                            </div>
+                            <small>Note: CV will be sent via email to cpwebtechs@gmail.com</small>
+                        </div>
+                        
+                        <div class="loading-spinner" id="cvUploadSpinner">
+                            <div class="spinner"></div>
+                            <p>Sending your CV and details...</p>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Submit CV & Contact Request</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="contact-form">
+                <div class="form-container">
+                    <form id="jobSeekerContactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactName">Full Name *</label>
+                                <input type="text" id="contactName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="contactEmail">Email Address *</label>
+                                <input type="email" id="contactEmail" class="form-control" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactSubject">Subject *</label>
+                            <input type="text" id="contactSubject" class="form-control" required placeholder="E.g., Career advice request, Interview preparation help, etc.">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactMessage">Your Message *</label>
+                            <textarea id="contactMessage" class="form-control" required placeholder="Please describe how I can assist you in your job search..."></textarea>
+                        </div>
+                        
+                        <div class="loading-spinner" id="jobSeekerSpinner">
+                            <div class="spinner"></div>
+                            <p>Sending your message...</p>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Employers Section -->
+    <section id="employers">
+        <div class="container">
+            <div class="section-title">
+                <h2>For Employers</h2>
+                <p>Looking for qualified candidates? Connect with me to access a pool of pre-screened, competent job seekers.</p>
+            </div>
+            
+            <div class="form-container">
+                <form id="employerForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="companyName">Company Name *</label>
+                            <input type="text" id="companyName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="employerName">Your Name *</label>
+                            <input type="text" id="employerName" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employerEmail">Email Address *</label>
+                            <input type="email" id="employerEmail" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="employerPhone">Phone Number *</label>
+                            <input type="tel" id="employerPhone" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jobOpening">Job Opening Title *</label>
+                        <input type="text" id="jobOpening" class="form-control" required placeholder="E.g., Senior Software Developer, Marketing Manager, etc.">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="industry">Industry *</label>
+                            <select id="industry" class="form-control" required>
+                                <option value="">Select Industry</option>
+                                <option value="technology">Technology</option>
+                                <option value="finance">Finance</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="education">Education</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="retail">Retail</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="experienceNeeded">Experience Needed *</label>
+                            <select id="experienceNeeded" class="form-control" required>
+                                <option value="">Select</option>
+                                <option value="entry">Entry Level (0-2 years)</option>
+                                <option value="mid">Mid Level (3-7 years)</option>
+                                <option value="senior">Senior Level (8+ years)</option>
+                                <option value="executive">Executive Level</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="employerMessage">Candidate Requirements *</label>
+                        <textarea id="employerMessage" class="form-control" required placeholder="Please describe the ideal candidate profile, required skills, qualifications, and any other important details..."></textarea>
+                    </div>
+                    
+                    <div class="loading-spinner" id="employerSpinner">
+                        <div class="spinner"></div>
+                        <p>Sending your request...</p>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Request Candidate Referrals</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background-color: #f5f7fa;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Me</h2>
+                <p>Get in touch directly for personalized assistance. All messages are sent to cpwebtechs@gmail.com</p>
+            </div>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>cpwebtechs@gmail.com</p>
+                    <p>Response within 24 hours</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Phone</h3>
+                    <p>+256 775640199</p> 
+                    <p>or</p>
+                     <p>+256 741963128</p> 
+                    <p>Mon-Fri, 9am-6pm EST</p>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Location</h3>
+                    <p>Enttebbe City , ln UGANDA</p>
+                    <p>Available for virtual meetings worldwide</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Career<span>Connect</span></div>
+                    <p>Bridging the gap between talented job seekers and forward-thinking employers through personalized career connection services.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#job-seekers">For Job Seekers</a></li>
+                        <li><a href="#employers">For Employers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>Connect With Me</h3>
+                    <div class="social-icons">
+                         <a href="https://wa.me/+256775640199" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                          <a href="tel:+256741963128" target="_blank"><i class="fas fa-phone"></i></a>
+                          <a href="#https://ticktok.com/cynics:" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="#https://twitter.com/cynics:" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                         <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <p style="margin-top: 1.5rem;">Follow for career tips and job opportunities</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 <img src="c:\Users\user\Desktop\static j\logo.png">  &CareerConnect. All rights reserved. | Designed to connect talent with opportunity</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Message Container -->
+    <div class="message" id="messageContainer">
+        <div class="message-content">
+            <i class="fas fa-check-circle" id="messageIcon"></i>
+            <span id="messageText">Your message has been sent successfully!</span>
+        </div>
+    </div>
+
+    <script>
+        // Initialize EmailJS with your public key
+        // Note: sign up at https://www.emailjs.com/ and get your own public key
+       
+        (function() {
+            emailjs.init("uTr6t4RTxzQcUQeJO"); // public key here
+        })();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Tab Switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // File Upload Display
+        const cvFileInput = document.getElementById('cvFile');
+        const fileNameDisplay = document.getElementById('fileName');
+        
+        cvFileInput.addEventListener('change', function() {
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = this.files[0].name;
+            } else {
+                fileNameDisplay.textContent = 'No file selected';
+            }
+        });
+        
+        // Show message function
+        function showMessage(type, text) {
+            const messageContainer = document.getElementById('messageContainer');
+            const messageIcon = document.getElementById('messageIcon');
+            const messageText = document.getElementById('messageText');
+            
+            // Set message type and content
+            messageContainer.className = `message ${type}`;
+            messageText.textContent = text;
+            
+            // Set appropriate icon
+            if (type === 'success') {
+                messageIcon.className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                messageIcon.className = 'fas fa-exclamation-circle';
+            } else if (type === 'warning') {
+                messageIcon.className = 'fas fa-exclamation-triangle';
+            } else {
+                messageIcon.className = 'fas fa-info-circle';
+            }
+            
+            // Show message
+            messageContainer.style.display = 'block';
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                messageContainer.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Form submission with EmailJS
+        document.getElementById('jobSeekerContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const spinner = document.getElementById('jobSeekerSpinner');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Show loading spinner
+            spinner.style.display = 'block';
+            submitBtn.disabled = true;
+            
+            // Prepare email parameters
+            const templateParams = {
+                to_email: 'cpwebtechs@gmail.com',
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                subject: document.getElementById('contactSubject').value,
+                message: document.getElementById('contactMessage').value,
+                form_type: 'Job Seeker Contact Form'
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('service_f40erpo', 'template_q2ed2tp', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showMessage('success', 'Message sent successfully! Mr: CYPRIAN will contact you in shortest time possible.');
+                    
+                    // Reset form
+                    document.getElementById('jobSeekerContactForm').reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    showMessage('error', 'Failed to send message. Please try again or contact me directly at cpwebtechs@gmail.com');
+                })
+                .finally(function() {
+                    // Hide loading spinner
+                    spinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
+        });
+        
+        // Employer form submission
+        document.getElementById('employerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const spinner = document.getElementById('employerSpinner');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Show loading spinner
+            spinner.style.display = 'block';
+            submitBtn.disabled = true;
+            
+            // Prepare email parameters
+            const templateParams = {
+                to_email: 'cpwebtechs@gmail.com',
+                company_name: document.getElementById('companyName').value,
+                name: document.getElementById('employerName').value,
+                email: document.getElementById('employerEmail').value,
+                phone: document.getElementById('employerPhone').value,
+                job_opening: document.getElementById('jobOpening').value,
+                industry: document.getElementById('industry').value,
+                experience_needed: document.getElementById('experienceNeeded').value,
+                requirements: document.getElementById('employerMessage').value,
+                form_type: 'Employer Candidate Request'
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('service_f40erpo', 'template_q2ed2tp', templateParams)    //service id and template id respectively.
+
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showMessage('success', 'Your candidate request has been sent! Mr: CYPRIAN will contact you soon with suitable candidates.');
+                    
+                    // Reset form
+                    document.getElementById('employerForm').reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    showMessage('error', 'Failed to send request. Please try again or contact us directly at cpwebtechs@gmail.com');
+                })
+                .finally(function() {
+                    // Hide loading spinner
+                    spinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
+        });
+        
+        // CV Upload form submission
+        document.getElementById('cvUploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const spinner = document.getElementById('cvUploadSpinner');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            
+            // Show loading spinner
+            spinner.style.display = 'block';
+            submitBtn.disabled = true;
+            
+            // Prepare email parameters
+            const templateParams = {
+                to_email: 'cpwebtechs@gmail.com',
+                name: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value || 'Not provided',
+                job_title: document.getElementById('jobTitle').value,
+                experience: document.getElementById('experience').value,
+                additional_info: document.getElementById('message').value || 'Not provided',
+                cv_file_name: cvFileInput.files.length > 0 ? cvFileInput.files[0].name : 'No file uploaded',
+                form_type: 'Job Seeker CV Upload'
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('service_f40erpo', 'template_q2ed2tp', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    showMessage('success', 'Your CV and details have been sent! Mr CYPRIAN will review your information and contact you soon.');
+                    
+                    // Reset form
+                    document.getElementById('cvUploadForm').reset();
+                    fileNameDisplay.textContent = 'No file selected';
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    showMessage('error', 'Failed to upload CV. Please try again or email your CV directly to cpwebtechs@gmail.com');
+                })
+                .finally(function() {
+                    // Hide loading spinner
+                    spinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Show instructions for setting up EmailJS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if EmailJS is properly initialized
+            if (!emailjs || emailjs.init.toString().includes('uTr6t4RTxzQcUQeJO')) {
+                showMessage('info', 'To enable email functionality, please set up EmailJS. See instructions in the code comments.');
+                console.log(`
+                    ============================================
+                    EMAILJS SETUP INSTRUCTIONS:
+                    ============================================
+                    1. Go to https://www.emailjs.com/ and sign up for a free account
+                    2. Create an email service (Gmail works well)
+                    3. Create an email template with variables that match the form data
+                    4. Copy your Public Key and replace "YOUR_PUBLIC_KEY_HERE" in the code
+                    5. Replace 'service_your_service_id' with your actual Service ID
+                    6. Replace 'template_your_template_id' with your actual Template ID
+                    7. All emails will be sent to: cpwebtechs@gmail.com
+                    ============================================ 
+                    
+                `);
+            }
+        });
+    </script>
+</body>
+</html>
